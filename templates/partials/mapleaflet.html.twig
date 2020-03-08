@@ -1,10 +1,6 @@
 <div id="{{mapname}}" {% if classes %}class="{{classes}}"{% else %}style="width: {{ width }}; height: {{ height }};" {%endif %}></div>
 <script>
-<<<<<<< HEAD
-document.addEventListener('DOMContentLoaded', function(event) { 
-=======
 document.addEventListener('DOMContentLoaded', function () {
->>>>>>> feature/proper-providers-management
     var map = L.map('{{mapname}}').setView([{{ lat }}, {{ lng }}],{{ zoom }});
     L.tileLayer('{{ tilestanza }}', {
         attribution: '{{ attribution }}',
