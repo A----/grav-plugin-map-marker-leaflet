@@ -1,7 +1,7 @@
 <div id="{{mapname}}" {% if classes %}class="{{classes}}"{% else %}style="width: {{ width }}; height: {{ height }};" {%endif %}></div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-    var map = L.map('{{mapname}}').setView([{{ lat }}, {{ lng }}],{{ zoom }});
+    let map = L.map('{{mapname}}').setView([{{ lat }}, {{ lng }}],{{ zoom }});
     L.tileLayer('{{ tilestanza }}', {
         attribution: '{{ attribution }}',
         maxZoom: {{ maxzoom }}
@@ -9,6 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
         {% if variant %}, variant: "{{ variant}}"{% endif %}
     }).addTo(map);
     {% if scale %}L.control.scale().addTo(map);{% endif %}
+    let bounds = L.latLngBounds();
 {{ markercode }}
+    if (bounds.isValid()) {
+        map.fitBounds(bounds);
+    }
 });
 </script>

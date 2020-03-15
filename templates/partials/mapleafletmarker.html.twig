@@ -11,4 +11,5 @@
           {% if mk.title %}, title: "{{ mk.title }}"{% endif %}
           {% if mk.drag %}, draggable: {{ mk.drag }}{% endif %}
         }).addTo(map);
+    bounds = bounds.extend([{{ mk.lat }},{{ mk.lng }}]);
 {% endfor %}

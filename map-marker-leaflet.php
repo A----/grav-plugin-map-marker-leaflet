@@ -19,11 +19,7 @@ class MapMarkerLeafletPlugin extends Plugin
         if ($this->isAdmin()) {
             return;
         }
-        // Enable the main events we are interested in
-        $this->enable([
-            'onShortcodeHandlers' => ['onShortcodeHandlers', 0],
-            'onTwigTemplatePaths' => ['onTwigTemplatePaths',0]
-        ]);
+
         //add assets
         $assets = $this->grav['assets'];
 
@@ -32,7 +28,24 @@ class MapMarkerLeafletPlugin extends Plugin
             'plugin://map-marker-leaflet/assets/leaflet.css'
         ]);
 
-        $assets->add('leaflet', 90);
+        //$assets->add('leaflet', 90);
+
+        // Enable the main events we are interested in
+        $this->enable([
+            'onAssetsInitialized' => ['onAssetsInitialized', 0],
+            'onShortcodeHandlers' => ['onShortcodeHandlers', 0],
+            'onTwigTemplatePaths' => ['onTwigTemplatePaths',0]
+        ]);
+    }
+
+    public function onAssetsInitialized()
+    {
+        $assets = $this->grav['assets'];
+
+        $assets->registerCollection('leaflet', [
+            'plugin://map-marker-leaflet/assets/leaflet.js',
+            'plugin://map-marker-leaflet/assets/leaflet.css'
+        ]);
     }
 
     public function onTwigTemplatePaths()

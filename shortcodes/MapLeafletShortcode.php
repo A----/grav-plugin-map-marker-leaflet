@@ -5,6 +5,12 @@ use Thunder\Shortcode\Shortcode\ShortcodeInterface;
 class MapLeafletShortcode extends Shortcode {
     public function init() {
         $this->shortcode->getHandlers()->add('map-leaflet', function(ShortcodeInterface $sc) {
+            
+            $this->shortcode->addAssets('js', 'plugin://map-marker-leaflet/assets/leaflet.js');
+            $this->shortcode->addAssets('css', 'plugin://map-marker-leaflet/assets/leaflet.css');
+            
+            //$this->shortcode->addAssets('leaflet');
+
             $s = $sc->getContent();
             $params = $sc->getParameters();
             $twig = $this->twig;
